@@ -49,9 +49,11 @@ var championSelector = championNumber.toString();
 
 function clearHeader() {
   var spellNamePrev = document.querySelector('h1');
+  var championNamePrev = document.querySelector('h4');
   var spellDescriptionPrev = document.querySelector('p');
   console.log(spellNamePrev);
   spellNamePrev.remove();
+  championNamePrev.remove();
   spellDescriptionPrev.remove();
 }
 
@@ -72,10 +74,20 @@ function populateHeader(jsonObj) {
   var ran_key = obj_keys[Math.floor(Math.random() *obj_keys.length)];
   myH1.textContent = jsonObj['data'][ran_key]['spells'][spellSelector]['name'];
   header.appendChild(myH1);
-  var myPara = document.createElement('p');
-  //myPara.textContent = jsonObj['data'][championSelector]['spells'][spellSelector]['description'];
-  myPara.textContent = jsonObj['data'][ran_key]['spells'][spellSelector]['description'];
-  header.appendChild(myPara);
+  var displaySpellDescription = document.getElementById('showSpellDescription');
+  displaySpellDescription.onclick = function() {
+    var myPara = document.createElement('p');
+    var myH4 = document.createElement('h4');
+    myH4.textContent = jsonObj['data'][ran_key]['key'];
+    header.appendChild(myH4);
+    myPara.textContent = jsonObj['data'][ran_key]['spells'][spellSelector]['description'];
+    header.appendChild(myPara);
+  };
+
+  //var myPara = document.createElement('p');
+  ////myPara.textContent = jsonObj['data'][championSelector]['spells'][spellSelector]['description'];
+  //myPara.textContent = jsonObj['data'][ran_key]['spells'][spellSelector]['description'];
+  //header.appendChild(myPara);
 }
 
 //console.log(champList['data'][3]['spells'][0]['description']);

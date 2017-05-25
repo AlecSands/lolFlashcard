@@ -10,7 +10,7 @@ body {
 }
 
 h1, h2 {
-  font-family: 'Comfortaa', sans-serif;
+  font-family: 'Passion One', sans-serif;
 }
 
 /* header styles */
@@ -20,7 +20,7 @@ h1 {
   text-align: center;
 }
 
-header p {
+header p, h4 {
   font-size: 1.3rem;
   font-weight: bold;
   text-align: center;
@@ -33,7 +33,7 @@ section article {
   float: left;
 }
 
-section p {
+section p, h4 {
   margin: 5px 0;
 }
 
