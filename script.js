@@ -4,6 +4,7 @@ var section = document.querySelector('section');
 
 var requestURL2 = 'https://na1.api.riotgames.com/lol/static-data/v3/champions?champListData=spells&dataById=true&api_key=RGAPI-1f6ceaad-7c6d-4b9d-8624-c25b883afa41';
 var request2 = new XMLHttpRequest();
+var champList;
 
 request2.open('GET', requestURL2);
 request2.responseType = 'json';
@@ -20,6 +21,8 @@ request2.onload = function() {
   console.log(allChamps['data'][1]['key']);
   console.log(allChamps['data'][498]['spells'][0]['name']);
   console.log(allChamps['data'][498]['spells'][0]['description']);
+  champList = allChamps;
+  return champList;
 };
 
 var championNumber = getRandomArbitrary(0, 136);
@@ -44,6 +47,24 @@ var championSelector = championNumber.toString();
 //  console.log('success1');
 //};
 
+function clearHeader() {
+  var spellNamePrev = document.querySelector('h1');
+  var spellDescriptionPrev = document.querySelector('p');
+  console.log(spellNamePrev);
+  spellNamePrev.remove();
+  spellDescriptionPrev.remove();
+}
+
+/*
+document.getElementById('videos').addEventListener('change',function(e){
+    var canvasElements=document.getElementById('thumbnails').getElementsByTagName('canvas');
+    for (var i = canvasElements.length - 1; i >= 0; i--) {
+        canvasElements[i].parentNode.removeChild(canvasElements[i]);
+        console.log('removed canvas');
+    }
+},true);
+*/
+
 function populateHeader(jsonObj) {
   var myH1 = document.createElement('h1');
   //myH1.textContent = jsonObj['data'][championSelector]['spells'][spellSelector]['key'];
@@ -56,6 +77,18 @@ function populateHeader(jsonObj) {
   myPara.textContent = jsonObj['data'][ran_key]['spells'][spellSelector]['description'];
   header.appendChild(myPara);
 }
+
+//console.log(champList['data'][3]['spells'][0]['description']);
+console.log(champList);
+
+var nextSpellDisplay = document.getElementById('nextSpell');
+
+nextSpellDisplay.onclick = function() {
+  var allChamps = request2.response;
+  clearHeader();
+  populateHeader(allChamps);
+};
+
 /*
 function pickRandomQuestion(){
         var obj_keys = Object.keys(jsonObj['data']);
